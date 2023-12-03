@@ -22,8 +22,8 @@ def signup(request):
                 user = User.objects.create_user(
                     username=request.POST['username'], password=request.POST['password1'])
                 user.save()
-                login(request, user)
-                return redirect('task')
+                # login(request, user)
+                return redirect('signin')
             # Registrar usuarios
             except:
                 return render(request, 'signup.html', {
@@ -41,20 +41,27 @@ def task(request):
     return render(request, 'task.html')
 
 def salir(request):
+    #Se usa el método logout() que recibe un reques como parámetro
     logout(request)
+    #S e retorna a la página principal
     return redirect('home')
 def signin(request):
+    # Si se usa el método GET se envia los datos de la interfaz signin
     if request.method=='GET':
          return render(request, 'signin.html',{
         'form':AuthenticationForm
         })
+    # Si se usa el método POST se recuperan los datos
     else:
-        user=authenticate(request,username=request.POST['username'], contraseña=request.POST['password'])
+        #método que permite iniciar sesión recibe tres parámetros(request, username and password)
+        user=authenticate(request,username=request.POST['username'], password=request.POST['password'])
+        #Si el usuario no existe 
         if user is None:
             return render(request, 'signin.html',{
                 'form':AuthenticationForm,
-                'error':'usuario no encontrdo'
+                'error':'usuario y contaseña incorrectos'
             })
+        #Si existe el usaurio en la bd, se carga la sesion del usuario y se redirecciona a la palntilla task
         else:
             login(request, user)
             return redirect('task')
