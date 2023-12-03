@@ -1,0 +1,9 @@
+{%  extends 'layout/base.html' %}
+{% block content %}
+<h1>signin</h1>
+<form action="/signin/" method="POST">
+    {{form.as_p}}
+    <button>Signin</button>
+</form>
+
+{% endblock %}
