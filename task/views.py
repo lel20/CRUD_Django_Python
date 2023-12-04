@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm #Para
 from django.contrib.auth.models import User  # Para registrar los usuarios
 from django.contrib.auth import login,logout,authenticate # para crear una sesion(cookie), para cerrar una sesion, para comprobar que exista el usuario en la bd
 from django.http import HttpResponse
+from .forms import createTaskForm
 
 
 def home(request):
@@ -65,4 +66,23 @@ def signin(request):
         else:
             login(request, user)
             return redirect('task')
+def create_task(request):
+    if request.method == 'GET':
+        return render (request, 'create_task.html',{
+            'form':createTaskForm
+        }) 
+    else: 
+        try:
+            task= createTaskForm(request.POST)
+            new_task=task.save(commit=False) 
+            new_task.user=request.user 
+            print(new_task)
+            new_task.save()
+            return redirect('task')
+
+        except ValueError:
+            return render (request, 'create_task.html',{
+            'form':createTaskForm,
+            'error':'Por favo provea de datos validos'
+        }) 
         

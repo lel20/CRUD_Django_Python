@@ -1,0 +1,11 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<form action="/task/createtask/" method="POST">
+    {% csrf_token%}
+    {{form.as_p}}
+    <button>Guardar</button>
+</form>
+
+
+{% endblock %}
