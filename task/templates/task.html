@@ -1,4 +1,18 @@
 {% extends 'layout/base.html' %}
 {% block content %}
-    <h1>tareas</h1>
+{% for tareas in task %}
+<ul>
+
+    <li>
+        {% if tareas.important %}
+        <strong>{{tareas.title}}</strong>
+        {% else %}
+        {{tareas.title}}
+        {% endif %}
+        <p>{{tareas.description}}</p>
+        <p>{{tareas.user}}</p>
+    </li>
+</ul>
+
+{% endfor %}
 {% endblock %}

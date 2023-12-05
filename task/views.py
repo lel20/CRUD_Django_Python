@@ -5,6 +5,7 @@ from django.contrib.auth.models import User  # Para registrar los usuarios
 from django.contrib.auth import login,logout,authenticate # para crear una sesion(cookie), para cerrar una sesion, para comprobar que exista el usuario en la bd
 from django.http import HttpResponse
 from .forms import createTaskForm
+from .models import Task
 
 
 def home(request):
@@ -39,7 +40,10 @@ def signup(request):
             })
 
 def task(request):
-    return render(request, 'task.html')
+    task=Task.objects.filter(user= request.user)
+    return render(request, 'task.html',{
+        'task': task
+    })
 
 def salir(request):
     #Se usa el método logout() que recibe un reques como parámetro
