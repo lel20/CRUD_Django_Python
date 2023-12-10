@@ -1,0 +1,25 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<h1>Taras complentas</h1>
+{% for task in task %}
+<ol>
+    <li>
+        <a href="{% url 'task_detail' task.id %}">
+            {% if task.important %}
+            <strong>{{task.title}}</strong>
+            {% else %}
+            {{task.title}}
+            {% endif %}
+            <p>{{task.description}}</p>
+            <p>{{task.user}}</p>
+            <p>{{task.datecompleted}}</p>
+        </a>
+    </li>
+    <form action="{% url 'delete_task' task.id %}" method="POST">
+        {% csrf_token %}
+        <button>borrar</button>
+    </form>
+</ol>
+{% endfor %}
+{% endblock %}

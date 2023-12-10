@@ -4,13 +4,15 @@
 <ul>
 
     <li>
-        {% if tareas.important %}
-        <strong>{{tareas.title}}</strong>
-        {% else %}
-        {{tareas.title}}
-        {% endif %}
-        <p>{{tareas.description}}</p>
-        <p>{{tareas.user}}</p>
+        <a href="{% url 'task_detail' tareas.id %}">
+            {% if tareas.important %}
+            <strong>{{tareas.title}}</strong>
+            {% else %}
+            {{tareas.title}}
+            {% endif %}
+            <p>{{tareas.description}}</p>
+            <p>{{tareas.user}}</p>
+        </a>
     </li>
 </ul>
 

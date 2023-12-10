@@ -1,29 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
     <title>CRUD con DJango</title>
 </head>
+
 <body>
-    <h1>CRUD CON DJANGO</h1>
-    <nav>
-        <ul>
-            <li><a href="/"> Home</a></li>
-            <li><a href="/task">Task</a></li>
-            
-            {% if user.is_authenticated %}
-            <li><a href="/logout">Logout</a></li>
-            {% else %}
-            <li><a href="/signup">Signup</a></li>
-            <li><a href="/signin">Signin</a></li>
-            {% endif %}
-            
-           
-        </ul>
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Notas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/task/createtask">Crear Tarea</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/task/complete/">Tareas Culminadas</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup">Signup</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/signin">Signin</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
     </nav>
+
+
     {% block content %}
 
     {% endblock %}
 </body>
+<script src="{% static '/js/bootstrap.min.js' %}""></script>
 </html>
