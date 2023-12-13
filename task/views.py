@@ -15,12 +15,9 @@ from django.contrib.auth.decorators import login_required #decorador permite pro
 def home(request):
     return render(request, 'home.html')
 
-
 def signup(request):
     if request.method == 'GET':
-        return render(request, 'signup.html', {
-            'form': UserCreationForm
-        })
+        return render(request, 'signup.html')
     else:
         if request.POST['password1'] == request.POST['password2']:
             try:
@@ -33,13 +30,10 @@ def signup(request):
             # Registrar usuarios
             except:
                 return render(request, 'signup.html', {
-                    'form': UserCreationForm,
                     'error': 'Usuario Existente'
                 })
-
         else:
             return render(request, 'signup.html', {
-                'form': UserCreationForm,
                 'error': 'Las contraseñas no coinciden'
             })
 
@@ -83,10 +77,8 @@ def task_detail(request, task_id):
     if request.method == 'GET':
         '''del modelo de tareas se utiliza <objets> para obtener un dato donde la clave primaria es igual al parametro <task_id>'''
         task = get_object_or_404(Task, pk=task_id, user=request.user)
-        form = createTaskForm(instance=task)
         return render(request, 'task_detail.html', {
             'task': task,
-            'form': form
         })
     else:
         try:
@@ -126,7 +118,6 @@ def signin(request):
     # Si se usa el método GET se envia los datos de la interfaz signin
     if request.method == 'GET':
         return render(request, 'signin.html', {
-            'form': AuthenticationForm
         })
     # Si se usa el método POST se recuperan los datos
     else:
@@ -136,7 +127,6 @@ def signin(request):
         # Si el usuario no existe
         if user is None:
             return render(request, 'signin.html', {
-                'form': AuthenticationForm,
                 'error': 'usuario y contaseña incorrectos'
             })
         # Si existe el usaurio en la bd, se carga la sesion del usuario y se redirecciona a la palntilla task

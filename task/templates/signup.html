@@ -1,13 +1,55 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
-<h1>hoal python</h1>
-{{error}}
-<form action="/signup/" method="POST">
-    {% csrf_token%}
-    <!-- as_p permite colocar los input en fila -->
-    {{form.as_p}}
 
-    <button> signup</button>
-</form>
+
+
+<!-- d-flex: orientacion en fila---vh-100: toma el alto total de la pantalla  -->
+<div class="m-auto container d-flex justify-content-center align-items-center vh-100">
+    <div class="row d-flex rounded-5">
+        <!---------- COL-1--------->
+        {{error}}
+        <div class=" rounded-5 col col-5 d-flex flex-column justify-content-center p-5 columna-2">
+           
+            <form class="form-control mt-3 p-3"  action="" method="POST">
+                 <!-- Texto centrado -->
+            <div class="text-center">
+                <h2>Registrarse</h2>
+            </div>
+            <!-- Logo del usuario -->
+            <div class=" d-flex justify-content-center logo mb-3">
+                <img src="../static/images/usuario.png" alt="logo-signin">
+            </div>
+                {% csrf_token %}
+                {{error}}
+                <div class="form-group row mb-3">
+                    <!-- <label class="col-sm-2 col-form-label" for="name"> Usuario</label> -->
+                    <input class="form-control" type="text" name="username" id="name" placeholder="Ingrese su usuario"
+                        required="name">
+                </div>
+                <div class="form-group row mb-3">
+                    <!-- <label class="col-sm-2 col-form-label" for="password1">Contraseña</label> -->
+                    <input class="form-control" type="password" name="password1" id="password1" placeholder="Ingrese su contraseña" required="password">
+                </div>
+                <div class="form-group row">
+                    <!-- <label class="col-sm-2 col-form-label" for="password2">Contraseña</label> -->
+                    <input class="form-control" type="password" name="password2" id="password2"
+                        placeholder="Repita su contraseña" required="password">
+                </div>
+                <div class=" form-group row">
+                    <button class="btn btn-primary">Registrarse</button>
+                </div>
+
+            </form>
+        </div>
+        <!----------- COL-2---------->
+        <!-- p: es el padin -->
+        <div class="col col-7">
+            <img class="rounded-5" src="../static/images/image-signin.jpg" alt="Imagen">
+
+        </div>
+    </div>
+
+</div>
+
 {% endblock %}

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/stylo.css' %}">
     <title>CRUD con DJango</title>
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">Notas</a>
+            <a class="navbar-brand" href="/">Notas</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,11 +21,14 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
+                        <a class="nav-link" href="/logout">Salir</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/task">Tareas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/task/createtask">Crear Tarea</a>
@@ -35,10 +38,10 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/signup">Signup</a>
+                        <a class="nav-link" href="/signup">Registrarse</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/signin">Signin</a>
+                        <a class="nav-link " href="/signin">Iniciar</a>
                     </li>
                     {% endif %}
                 </ul>

@@ -1,20 +1,29 @@
 {% extends 'layout/base.html' %}
 {% block content %}
-{% for tareas in task %}
-<ul>
 
-    <li>
-        <a href="{% url 'task_detail' tareas.id %}">
-            {% if tareas.important %}
-            <strong>{{tareas.title}}</strong>
-            {% else %}
-            {{tareas.title}}
-            {% endif %}
-            <p>{{tareas.description}}</p>
-            <p>{{tareas.user}}</p>
-        </a>
-    </li>
-</ul>
+<div class="container m-3  ">
+    <div class="row fila">
+        {% for tareas in task %}
+        <div class="col-sm-3 mb-3 mb-sm-0 ">
+            <div class="card carta">
+                <a class="link-offset-2 link-underline link-underline-opacity-0"
+                    href="{% url 'task_detail' tareas.id %}">
+                    <div class="card-body tarjetas">
+                        {% if tareas.important %}
+                        <h5 class="card-title text-center"><strong>{{tareas.title}}</strong></h5>
+                        {% else %}
+                        <h5 class="card-title text-center">{{tareas.title}}</h5>
+                        {% endif %}
+                        <p class="card-text">{{tareas.description}}</p>
+                        <!-- <p>{{tareas.user}}</p> -->
+                        </p>
+                        <!-- <a href="#" class="btn btn-primary"></a> -->
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
-{% endfor %}
 {% endblock %}
